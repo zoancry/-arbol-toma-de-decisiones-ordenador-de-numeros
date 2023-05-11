@@ -1,1 +1,1 @@
-# -rbol-de-decisiones-ordenador-de-n-meros
+# -arbol-de-decisiones-ordenador-de-n-meros
