@@ -1,0 +1,39 @@
+#La función agregar_nodo agrega un nuevo nodo a un árbol binario de búsqueda
+# y devuelve la raíz del árbol actualizada. 
+
+def agregar_nodo(raiz, dato):
+    if raiz is None:
+        return {'dato': dato, 'izquierda': None, 'derecha': None}
+    elif dato < raiz['dato']:
+        raiz['izquierda'] = agregar_nodo(raiz['izquierda'], dato)
+    else:
+        raiz['derecha'] = agregar_nodo(raiz['derecha'], dato)
+    return raiz
+# La función inorden recorre el árbol en orden y devuelve los valores en orden ascendente.
+def inorden(raiz):
+    if raiz is None:
+        return
+    for n in inorden(raiz['izquierda']):
+        yield n
+    yield raiz['dato']
+    '''
+    yield es una orden muy similar a un return, con una gran diferencia, yield pausará la ejecución de tu función
+     y guardará el estado de la misma hasta que decidas usarla de nuevo
+    '''
+    for n in inorden(raiz['derecha']):
+        yield n
+
+# Ejemplo de uso del código
+numeros = [[5, 8, 3, 1, 9, 6, 7, 2, 4],[5, 8, 3, 1, 9, 6, 7, 2, 4,12,23,34,54,1,23,25,29]]
+#Recorremos y utilizamos estas dos funciones para crear y recorrer el árbol binario de búsqueda para cada lista en numeros.
+
+ 
+for i, lista in enumerate(numeros):
+    # La variable raiz almacena la raíz del árbol para cada lista y se actualiza cada vez que se agrega un nuevo nodo a través de la función agregar_nodo.
+    raiz = None
+    for num in lista:
+        raiz = agregar_nodo(raiz, num)
+    print('La lista', i + 1, 'en orden es:')
+    #Finalmente, se recorre el árbol en orden ascendente a través de la función inorden y se imprimen los valores ordenados.
+    for num in inorden(raiz):
+        print(num)
